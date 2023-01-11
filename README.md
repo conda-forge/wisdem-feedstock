@@ -293,6 +293,5 @@ Feedstock Maintainers
 =====================
 
 * [@gbarter](https://github.com/gbarter/)
-* [@johnjasa](https://github.com/johnjasa/)
 * [@ptrbortolotti](https://github.com/ptrbortolotti/)
 

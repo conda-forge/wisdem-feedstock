@@ -1,5 +1,5 @@
-{% set release = "v3.7" %}
-{% set version = "3.7" %}
+{% set release = "v3.8.7" %}
+{% set version = "3.8.7" %}
 {% set name = "wisdem" %}
 
 package:
@@ -9,45 +9,50 @@ package:
 source:
   url: https://github.com/WISDEM/WISDEM/archive/{{ release }}.tar.gz
     # Download the tar-ball and do: openssl sha256 file.tar.gz to update
-  sha256: bb758f125c894dbeb5da804bcfb5e3ffb61ba1c88ea2f85d4bd8befc724f0340
+  sha256: 8ad987002966755ea52a90b37ebbaae6e04685cea9954303f5709c09e659b72c
 
 build:
   number: 1
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
-  skip: true  # [py<37]
-
+  skip: true  # [py<38]
+  #script: {{ PYTHON }} -m pip install . --no-deps -vv
+  #script: {{ PYTHON }} setup.py install --single-version-externally-managed --record=record.txt
+    
 requirements:
   build:
-    - {{ compiler('c') }}
-#        - {{ compiler('cxx') }}
+    - {{ compiler('c') }}         # [not win]
     - {{ compiler('fortran') }}
-    - {{ compiler('m2w64_c') }}        # [win]
-#        - {{ compiler('m2w64_cxx') }}    # [win]
+    - {{ compiler('m2w64_c') }}   # [win]
     - make
+    - meson
+    - ninja
+    - numpy
+    - pkg-config
+    - python
+    - python-build
+    - wheel
   host:
-    - libblas
-    - libcblas
-    - liblapack
+    - cython
+#    - libblas
+#    - liblapack
     - libpython        # [win]
     - python
+    - python-build
     - pip
     - numpy
-    - setuptools <60.0
-    - cython
+    - setuptools
   run:
-    - python
-        # Putting regular numpy in 'host' section and pin_compatible here per conda-forge guidance
-    - {{ pin_compatible('numpy') }}
-    - cython
+#    - cython
     - jsonschema
     - matplotlib-base
     - nlopt
+    - {{ pin_compatible('numpy') }}
     - openmdao >=3.18
     - openpyxl
     - pandas
+    - pydoe2
     - pyoptsparse
-    - pyside2
     - pytest
+    - python
     - python-benedict
     - pyyaml
     - ruamel_yaml
@@ -55,12 +60,19 @@ requirements:
     - simpy
     - sortedcontainers
     - statsmodels
-    - swig
-        # DO NOT ADD MPI- it breaks the conda build.  Users have to add it afterwards
+#    - swig
+
+# DO NOT ADD MPI- it breaks the conda build.  Users have to add it afterwards
+# Putting numpy in 'host' section and pin_compatible in run per conda-forge guidance
+    
 test:
-    # Fails unless we create conda package for simpy, marmot-agents
   imports:
     - wisdem
+#  requires:
+#      - pip
+#  commands:
+#      - pip install marmot-agents
+#      - python -c "import unittest; import wisdem.test.test_gluecode.test_gluecode as myt; unittest.TextTestRunner().run(myt.suite() )"
 
 about:
   home: https://wisdem.readthedocs.io
@@ -80,4 +92,3 @@ extra:
   recipe-maintainers:
     - ptrbortolotti
     - gbarter
-    - johnjasa
