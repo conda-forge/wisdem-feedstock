@@ -79,7 +79,8 @@ requirements:
         - openmdao <3.28
         - openpyxl
         - pandas
-        - pyoptsparse
+        # This one causes some compiler conflicts for now
+        #- pyoptsparse
         - python
         - python-benedict
         - pyyaml
