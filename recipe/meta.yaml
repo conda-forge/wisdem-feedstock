@@ -56,7 +56,7 @@ requirements:
         - ninja                                  # [build_platform != target_platform]
         - numpy                                  # [build_platform != target_platform]
         - pkg-config                             # [build_platform != target_platform]
-        - {{ compiler('c') }}
+        - {{ compiler('c') }}                    # [unix]
         - {{ compiler('fortran') }}              # [unix]
         - clang                                  # [win]
         - flang                                  # [win]
