@@ -6,8 +6,8 @@
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
 {% set mpi = mpi or 'nompi' %}
 
-{% if mpi == 'nompi' %}
 # prioritize nompi variant via build number
+{% if mpi == 'nompi' %}
 {% set build = build + 100 %}
 {% endif %}
 package:
@@ -35,11 +35,11 @@ build:
     {% else %}
     {% set mpi_prefix = "nompi" %}
     {% endif %}
-    string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
+    string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"   # [not win]
     
     {% if mpi != 'nompi' %}
-    run_exports:
-        - {{ name }} * {{ mpi_prefix }}_*
+    run_exports:                             # [not win]
+        - {{ name }} * {{ mpi_prefix }}_*    # [not win]
     {% endif %}
         
     skip: true  # [py<39]
@@ -56,7 +56,7 @@ requirements:
         - ninja                                  # [build_platform != target_platform]
         - numpy                                  # [build_platform != target_platform]
         - pkg-config                             # [build_platform != target_platform]
-        - {{ compiler('c') }}                    # [unix]
+        - {{ compiler('c') }}
         - {{ compiler('fortran') }}              # [unix]
         - clang                                  # [win]
         - flang                                  # [win]
@@ -71,7 +71,7 @@ requirements:
         - python
         - python-build
         - setuptools
-        - {{ mpi }}  # [mpi != 'nompi']
+        - {{ mpi }}  # [mpi != 'nompi' and not win]
     run:
         - jsonschema
         - moorpy
@@ -89,7 +89,7 @@ requirements:
         - simpy
         - sortedcontainers
         - statsmodels
-        - {{ mpi }}  # [mpi != 'nompi']    
+        - {{ mpi }}  # [mpi != 'nompi' and not win]    
         - {{ pin_compatible('numpy') }}
 
 # Putting numpy in 'host' section and pin_compatible in run per conda-forge guidance
