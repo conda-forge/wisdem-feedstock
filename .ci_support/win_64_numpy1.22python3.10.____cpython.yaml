@@ -1,9 +1,11 @@
-c_compiler:
-- vs2019
 channel_sources:
-- conda-forge/label/meson_dev,conda-forge
+- conda-forge
 channel_targets:
 - conda-forge main
+m2w64_c_compiler:
+- m2w64-toolchain
+m2w64_fortran_compiler:
+- m2w64-toolchain
 mpi:
 - nompi
 mpich:
