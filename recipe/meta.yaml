@@ -1,4 +1,4 @@
-{% set version = "3.15.1" %}
+{% set version = "3.15.2" %}
 {% set name = "wisdem" %}
 {% set build = 0 %}
 
@@ -11,135 +11,132 @@
 {% set build = build + 100 %}
 {% endif %}
 package:
-    name: {{ name|lower }}
-    version: {{ version }}
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-    url: https://github.com/WISDEM/WISDEM/archive/v{{ version }}.tar.gz
+  url: https://github.com/WISDEM/WISDEM/archive/v{{ version }}.tar.gz
     # Download the tar-ball and do: openssl sha256 file.tar.gz to update
-    sha256: fe42585b40867b26169a4a8e6b54688c67bba548441d38059f96db2efa76d603
+  sha256: ac964c40615878b568f4cc61898e657f9081bb901631ead79e89022350b12d87
     #patches:
     #    - gui_import.patch
-      
 build:
-    number: {{ build }}
+  number: {{ build }}
 
     # add build string so packages can depend on
     # mpi or nompi variants explicitly:
     # `pkg * mpi_mpich_*` for mpich
     # `pkg * mpi_*` for any mpi
     # `pkg * nompi_*` for no mpi
-    
     {% if mpi != 'nompi' %}
     {% set mpi_prefix = "mpi_" + mpi %}
     {% else %}
     {% set mpi_prefix = "nompi" %}
     {% endif %}
-    string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"  # [not win]
-    
+  string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"  # [not win]
+
     {% if mpi != 'nompi' %}
-    run_exports:
-        - {{ name }} * {{ mpi_prefix }}_*
+  run_exports:
+    - {{ name }} * {{ mpi_prefix }}_*
     {% endif %}
 
-    skip: true  # [py<39]
+  skip: true  # [py<39]
     #script:
     #  - {{ PYTHON }} -m pip install . --no-deps -vv
     #  - rm -rf {{ SP_DIR }}/meson_build         # [not win]
     #  - rmdir /s /q {{ SP_DIR }}\meson_build    # [win]
-  
-    entry_points:
-        - wisdem = wisdem.main:wisdem_cmd
-        - compare_designs = wisdem.postprocessing.compare_designs:main
-      
+  entry_points:
+    - wisdem = wisdem.main:wisdem_cmd
+    - compare_designs = wisdem.postprocessing.compare_designs:main
+
 requirements:
-    build:
+  build:
         # Windows Visual Studio has trouble with pyframe3dd and ccblade, but don't know why
         # Just need modern GCC version I guess
-        - {{ stdlib("c") }}                      # [not win]
-        - {{ compiler('c') }}                    # [not win]
-        - {{ compiler('fortran') }}              # [not win]
-        - {{ compiler('m2w64_c') }}              # [win]
-        - {{ compiler('m2w64_fortran') }}        # [win]
-        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-        - python                                 # [build_platform != target_platform]
-        - meson                                  # [build_platform != target_platform]
-        - ninja                                  # [build_platform != target_platform]
-        - numpy                                  # [build_platform != target_platform]
-        - pkg-config                             # [build_platform != target_platform]
-        - wheel                                  # [build_platform != target_platform]
-        - python-build                           # [build_platform != target_platform]
-    host:
+    - {{ stdlib("c") }}                          # [not win]
+    - {{ compiler('c') }}                        # [not win]
+    - {{ compiler('fortran') }}                  # [not win]
+    - {{ compiler('m2w64_c') }}                  # [win]
+    - {{ compiler('m2w64_fortran') }}            # [win]
+    - cross-python_{{ target_platform }}         # [build_platform != target_platform]
+    - python                                     # [build_platform != target_platform]
+    - meson                                      # [build_platform != target_platform]
+    - ninja                                      # [build_platform != target_platform]
+    - numpy                                      # [build_platform != target_platform]
+    - pkg-config                                 # [build_platform != target_platform]
+    - wheel                                      # [build_platform != target_platform]
+    - python-build                               # [build_platform != target_platform]
+  host:
         #- compiler-rt                            # [win]
-        - libpython                              # [win]
-        - cython
-        - meson
-        - python
-        - python-build
-        - pip
-        - numpy
-        - setuptools
-        - {{ mpi }}  # [mpi != 'nompi' and not win]
-    run:
+    - libpython                                  # [win]
+    - cython
+    - meson
+    - python
+    - python-build
+    - pip
+    - numpy
+    - setuptools
+    - {{ mpi }}      # [mpi != 'nompi' and not win]
+  run:
         #    - cython
-        - jsonschema
-        - matplotlib-base
-        - moorpy
-        - nlopt
-        - {{ pin_compatible('numpy') }}
-        - openmdao >3.30
-        - openpyxl
-        - pandas
-        - pydoe3
+    - jsonschema
+    - matplotlib-base
+    - moorpy
+    - nlopt
+    - {{ pin_compatible('numpy') }}
+    - openmdao >3.30
+    - openpyxl
+    - pandas
+    - pydoe3
         #    - pyoptsparse
-        - pytest
-        - python
-        - python-benedict
-        - pyyaml
-        - ruamel.yaml
-        - scipy
-        - simpy
-        - sortedcontainers
-        - statsmodels
-        - {{ mpi }}  # [mpi != 'nompi' and not win]    
+    - pytest
+    - python
+    - python-benedict
+    - pyyaml
+    - ruamel.yaml
+    - scipy
+    - simpy
+    - sortedcontainers
+    - statsmodels
+    - {{ mpi }}      # [mpi != 'nompi' and not win]    
 
 # Putting numpy in 'host' section and pin_compatible in run per conda-forge guidance
 test:
-    imports:
-        - wisdem
-    requires:
-        - pip
-        - pytest
-    source_files:
-        - wisdem
-        - examples
-        - examples/02_reference_turbines
-    commands:
-        - pip install marmot-agents 
-        - wisdem --help
-        - compare_designs -h
-        - cd examples
-        - cd 02_reference_turbines
-        - python nrel5mw_driver.py
-        - cd ..
-        - cd ..
+  imports:
+    - wisdem
+  requires:
+    - pip
+    - pytest
+  source_files:
+    - wisdem
+    - examples
+    - examples/02_reference_turbines
+  commands:
+    - pip install marmot-agents
+    - wisdem --help
+    - compare_designs -h
+    - cd examples
+    - cd 02_reference_turbines
+    - python nrel5mw_driver.py
+    - cd ..
+    - cd ..
         #- "cd wisdem/test/test_gluecode; pytest test_gluecode; cd ../../..;"
 
 about:
-    home: https://wisdem.readthedocs.io
-    license: Apache-2.0
-    license_file: LICENSE
-    summary: Wind-Plant Integrated System Design and Engineering Model
-    description: |
-        The Wind-Plant Integrated System Design and Engineering Model (WISDEM®) is a
-        set of models for assessing overall wind plant cost of energy (COE). The models
-        use wind turbine and plant cost and energy production as well as financial
-        models to estimate coe and other wind plant system attributes. WISDEM is developed by
-        the National Renewable Energy Lab, on top of NASA's OpenMDAO library.
-    doc_url: https://wisdem.readthedocs.io
-    dev_url: https://github.com/wisdem/wisdem
+  home: https://wisdem.readthedocs.io
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Wind-Plant Integrated System Design and Engineering Model
+  description: |
+    The Wind-Plant Integrated System Design and Engineering Model (WISDEM®) is a
+    set of models for assessing overall wind plant cost of energy (COE). The models
+    use wind turbine and plant cost and energy production as well as financial
+    models to estimate coe and other wind plant system attributes. WISDEM is developed by
+    the National Renewable Energy Lab, on top of NASA's OpenMDAO library.
+  doc_url: https://wisdem.readthedocs.io
+  dev_url: https://github.com/wisdem/wisdem
 
 extra:
-    recipe-maintainers:
-        - ptrbortolotti
-        - gbarter
+  recipe-maintainers:
+    - ptrbortolotti
+    - gbarter
