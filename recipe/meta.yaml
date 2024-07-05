@@ -74,7 +74,7 @@ requirements:
     - python
     - python-build
     - pip
-    - numpy>1.25
+    - numpy >1.25
     - setuptools
     - {{ mpi }}      # [mpi != 'nompi' and not win]
   run:
