@@ -84,7 +84,7 @@ requirements:
     - moorpy
     - nlopt
     - numpy
-    - openmdao >3.30
+    - openmdao >=3.33
     - openpyxl
     - pandas
     - pydoe3
