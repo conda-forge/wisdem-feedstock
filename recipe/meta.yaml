@@ -62,7 +62,7 @@ requirements:
     - python                                     # [build_platform != target_platform]
     - meson                                      # [build_platform != target_platform]
     - ninja                                      # [build_platform != target_platform]
-    - numpy                                      # [build_platform != target_platform]
+    - numpy <2.0                                 # [build_platform != target_platform]
     - pkg-config                                 # [build_platform != target_platform]
     - wheel                                      # [build_platform != target_platform]
     - python-build                               # [build_platform != target_platform]
@@ -83,7 +83,7 @@ requirements:
     - matplotlib-base
     - moorpy
     - nlopt
-    - numpy
+    - numpy <2.0
     - openmdao >=3.33
     - openpyxl
     - pandas
