@@ -25,7 +25,6 @@ fi
 #PKG_CONFIG=$(which pkg-config)
 #export PKG_CONFIG
 
-
 #cd "${SRC_DIR}"
 
 # MESON_ARGS is used within setup.py to pass extra arguments to meson
