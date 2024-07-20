@@ -1,0 +1,27 @@
+channel_sources:
+- conda-forge/label/meson_dev,conda-forge
+channel_targets:
+- conda-forge main
+m2w64_c_compiler:
+- m2w64-toolchain
+m2w64_fortran_compiler:
+- m2w64-toolchain
+mpi:
+- nompi
+mpich:
+- '4'
+numpy:
+- '2.0'
+openmpi:
+- '5'
+pin_run_as_build:
+  python:
+    min_pin: x.x
+    max_pin: x.x
+python:
+- 3.11.* *_cpython
+target_platform:
+- win-64
+zip_keys:
+- - python
+  - numpy
