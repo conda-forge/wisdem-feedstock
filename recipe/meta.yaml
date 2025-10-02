@@ -1,4 +1,4 @@
-{% set version = "3.22.4" %}
+{% set version = "3.22.5" %}
 {% set name = "wisdem" %}
 {% set build = 0 %}
 
@@ -17,7 +17,7 @@ package:
 source:
   url: https://github.com/WISDEM/WISDEM/archive/v{{ version }}.tar.gz
     # Download the tar-ball and do: openssl sha256 file.tar.gz to update
-  sha256: d67aff7ece11d6a9949b23cd0f3de3b640d831e954b9793ab12c53a318b693eb
+  sha256: bc9bfe3d65b17e63b8ea0e1f103c38c7d965e7a2cbcc6296e964bba1634194c9
     #patches:
     #    - gui_import.patch
 build:
@@ -102,7 +102,7 @@ requirements:
 
 # Putting numpy in 'host' section and pin_compatible in run per conda-forge guidance
 test:
-  # Imports won't work without Orbit
+  # Imports won't work without ORBIT  
   #imports:
   #  - wisdem
   requires:
