@@ -1,6 +1,6 @@
 {% set version = "3.22.5" %}
 {% set name = "wisdem" %}
-{% set build = 0 %}
+{% set build = 1 %}
 
 # MPI now supported! https://conda-forge.org/docs/maintainer/knowledge_base.html#message-passing-interface-mpi
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
@@ -18,8 +18,8 @@ source:
   url: https://github.com/WISDEM/WISDEM/archive/v{{ version }}.tar.gz
     # Download the tar-ball and do: openssl sha256 file.tar.gz to update
   sha256: bc9bfe3d65b17e63b8ea0e1f103c38c7d965e7a2cbcc6296e964bba1634194c9
-    #patches:
-    #    - gui_import.patch
+  patches:
+    - setup.patch
 build:
   number: {{ build }}
 
@@ -53,11 +53,10 @@ requirements:
   build:
         # Windows Visual Studio has trouble with pyframe3dd and ccblade, but don't know why
         # Just need modern GCC version I guess
-    - {{ stdlib("c") }}                          # [not win]
-    - {{ compiler('c') }}                        # [not win]
-    - {{ compiler('fortran') }}                  # [not win]
-    - {{ compiler('m2w64_c') }}                  # [win]
-    - {{ compiler('m2w64_fortran') }}            # [win]
+    - {{ stdlib("c") }}
+    - {{ compiler('c') }}
+    - {{ compiler('fortran') }}
+    - clang                                      # [ win ]
     - cross-python_{{ target_platform }}         # [build_platform != target_platform]
     - python                                     # [build_platform != target_platform]
     - meson                                      # [build_platform != target_platform]
@@ -67,8 +66,6 @@ requirements:
     - wheel                                      # [build_platform != target_platform]
     - python-build                               # [build_platform != target_platform]
   host:
-        #- compiler-rt                            # [win]
-    - libpython                                  # [win]
     - cython
     - meson
     - python
@@ -88,7 +85,7 @@ requirements:
     - openpyxl
     - pandas
     - pydoe3
-        #    - pyoptsparse
+    - pyoptsparse
     - pytest
     - python
     - python-benedict

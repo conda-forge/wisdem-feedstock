@@ -20,8 +20,8 @@ REM clang-cl.exe --version
 REM if %ERRORLEVEL% neq 0 exit 1
 
 REM set compilers to clang-cl
-REM set "CC=clang-cl"
-REM set "CXX=clang-cl"
+set "CC=clang-cl"
+set "CXX=clang-cl"
 
 REM flang 17 still uses "temporary" name
 REM set "FC=flang-new"

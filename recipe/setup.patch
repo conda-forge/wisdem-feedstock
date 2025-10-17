@@ -1,0 +1,21 @@
+diff --git a/setup.py b/setup.py
+index 1a687b79..80a649bd 100644
+--- a/setup.py
++++ b/setup.py
+@@ -35,11 +35,11 @@ def run_meson_build(staging_dir):
+     if "MESON_ARGS" in os.environ:
+         meson_args = os.environ["MESON_ARGS"]
+ 
+-    if platform.system() == "Windows":
+-        if not "FC" in os.environ:
+-            os.environ["FC"] = "gfortran"
+-        if not "CC" in os.environ:
+-            os.environ["CC"] = "gcc"
++    #if platform.system() == "Windows":
++    #    if not "FC" in os.environ:
++    #        os.environ["FC"] = "gfortran"
++    #    if not "CC" in os.environ:
++    #        os.environ["CC"] = "gcc"
+ 
+     # configure
+     meson_path = shutil.which("meson")
