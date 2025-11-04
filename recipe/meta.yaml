@@ -81,8 +81,8 @@ requirements:
         #    - cython
     - jsonschema
     - matplotlib-base
-    - moorpy
-    - nlopt <=2.8
+    - moorpy >=1.2
+    - nlopt
     - numpy
     - openmdao >3.30
     - openpyxl
@@ -94,10 +94,10 @@ requirements:
     - python-benedict
     - pyyaml
     - ruamel.yaml
-    - scipy <1.16.0
+    - scipy
     - simpy
     - sortedcontainers
-    - statsmodels
+    - statsmodels >=0.14.5
     - {{ mpi }}      # [mpi != 'nompi' and not win]    
 
 # Putting numpy in 'host' section and pin_compatible in run per conda-forge guidance
@@ -116,7 +116,7 @@ test:
     - pip install orbit-nrel
     - pip install jsonmerge
     - pip install windIO
-    - pip install dearpygui
+    - pip install dearpygui   # [not aarch64]
     - wisdem --help
     - compare_designs -h
     - cd examples
