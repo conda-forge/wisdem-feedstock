@@ -40,7 +40,7 @@ build:
     - {{ name }} * {{ mpi_prefix }}_*
     {% endif %}
 
-  skip: true  # [py<39]
+  skip: true  # [py<311]
     #script:
     #  - {{ PYTHON }} -m pip install . --no-deps -vv
     #  - rm -rf {{ SP_DIR }}/meson_build         # [not win]
@@ -117,7 +117,7 @@ test:
     - pip install jsonmerge
     - pip install windIO
     - pip install dearpygui   # [not aarch64]
-    - pip install wombat>=0.13.1
+    - pip install wombat >=0.13.1
     - wisdem --help
     - compare_designs -h
     - cd examples
