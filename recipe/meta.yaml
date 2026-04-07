@@ -1,6 +1,6 @@
 {% set version = "4.1.0" %}
 {% set name = "wisdem" %}
-{% set build = 1 %}
+{% set build = 2 %}
 
 # MPI now supported! https://conda-forge.org/docs/maintainer/knowledge_base.html#message-passing-interface-mpi
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
@@ -79,10 +79,10 @@ requirements:
     - {{ mpi }}      # [mpi != 'nompi' and not win]
   run:
         #    - cython
+    - jsonmerge
     - jsonschema
     - matplotlib-base
     - moorpy >=1.2
-    - nlopt
     - numpy
     - openmdao >3.30
     - openpyxl
@@ -99,6 +99,11 @@ requirements:
     - sortedcontainers
     - statsmodels >=0.14.5
     - {{ mpi }}      # [mpi != 'nompi' and not win]    
+    - nlopt # opt
+    - orbit-nrel
+    - jsonmerge
+    - windio
+    - wombat >=0.13.1
 
 # Putting numpy in 'host' section and pin_compatible in run per conda-forge guidance
 test:
@@ -113,11 +118,7 @@ test:
     - examples
     - examples/02_reference_turbines
   commands:
-    - pip install orbit-nrel
-    - pip install jsonmerge
-    - pip install windIO
     - pip install dearpygui   # [not aarch64]
-    - pip install wombat >=0.13.1
     - wisdem --help
     - compare_designs -h
     - cd examples
@@ -125,6 +126,8 @@ test:
     - python nrel5mw_driver.py
     - cd ..
     - cd ..
+    - pytest -vvv
+
 
 
 about:
