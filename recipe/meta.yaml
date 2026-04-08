@@ -125,7 +125,7 @@ test:
     - python nrel5mw_driver.py
     - cd ..
     - cd ..
-    - pytest --unit
+    - pytest --unit wisdem/test/
 
 
 about:
