@@ -1,5 +1,5 @@
 context:
-  version: "4.1.0"
+  version: "4.2.0"
   name: wisdem
   build: 2
   mpi: ${{ mpi or 'nompi' }}
@@ -14,7 +14,7 @@ package:
 
 source:
   url: https://github.com/WISDEM/WISDEM/archive/v${{ version }}.tar.gz
-  sha256: ecff198dcf9a4efcf73864e46b6c85b324d547dc87f493ad48b547bfaa1a4872
+  sha256: fd2ccf452f969501bbf990bd754062bf711b755030cb457afdadaa4a4a465bf3
 
 build:
   number: ${{ build_number }}
@@ -74,7 +74,7 @@ requirements:
     - jsonmerge
     - jsonschema
     - openmdao >3.30
-    - moorpy >=1.2
+    - moorpy ==1.2.1
     - pydoe3
     - pytest
     - python-benedict
@@ -83,7 +83,7 @@ requirements:
     - statsmodels >=0.14.5
     - nlopt
     - orbit-nrel
-    - windio
+    - windio >=2.1.1
     - wombat >=0.13.1
     - if: mpi != 'nompi'
       then:
