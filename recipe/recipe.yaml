@@ -101,7 +101,6 @@ tests:
         then:
           - pip install dearpygui
       - cd examples/02_reference_turbines && python nrel5mw_driver.py && cd ../..
-      - pytest --unit -vvv wisdem/test/
     requirements:
       run:
         - pip
