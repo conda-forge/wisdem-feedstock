@@ -1,7 +1,7 @@
 context:
   version: "4.2.0"
   name: wisdem
-  build: 0
+  build: 1
   mpi: ${{ mpi or 'nompi' }}
   build_number: ${{ build + 100 if mpi == 'nompi' else build }}
   # MPI now supported! https://conda-forge.org/docs/maintainer/knowledge_base.html#message-passing-interface-mpi
