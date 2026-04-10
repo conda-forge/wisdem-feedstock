@@ -1,6 +1,6 @@
 {% set version = "4.2.0" %}
 {% set name = "wisdem" %}
-{% set build = 0 %}
+{% set build = 1 %}
 
 # MPI now supported! https://conda-forge.org/docs/maintainer/knowledge_base.html#message-passing-interface-mpi
 # ensure mpi is defined (needed for conda-smithy recipe-lint)
@@ -40,7 +40,7 @@ build:
     - {{ name }} * {{ mpi_prefix }}_*
     {% endif %}
 
-  skip: true  # [py<39]
+  skip: true  # [py<311]
     #script:
     #  - {{ PYTHON }} -m pip install . --no-deps -vv
     #  - rm -rf {{ SP_DIR }}/meson_build         # [not win]
