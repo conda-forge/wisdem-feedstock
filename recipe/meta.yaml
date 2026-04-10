@@ -1,4 +1,4 @@
-{% set version = "4.1.0" %}
+{% set version = "4.2.0" %}
 {% set name = "wisdem" %}
 {% set build = 1 %}
 
@@ -17,7 +17,7 @@ package:
 source:
   url: https://github.com/WISDEM/WISDEM/archive/v{{ version }}.tar.gz
     # Download the tar-ball and do: openssl sha256 file.tar.gz to update
-  sha256: ecff198dcf9a4efcf73864e46b6c85b324d547dc87f493ad48b547bfaa1a4872
+  sha256: fd2ccf452f969501bbf990bd754062bf711b755030cb457afdadaa4a4a465bf3
     #patches:
     #    - gui_import.patch
 build:
@@ -79,13 +79,16 @@ requirements:
     - {{ mpi }}      # [mpi != 'nompi' and not win]
   run:
         #    - cython
+    - jsonmerge
     - jsonschema
     - matplotlib-base
-    - moorpy >=1.2
+    - moorpy ==1.2.1
+    - {{ mpi }}      # [mpi != 'nompi' and not win]    
     - nlopt
     - numpy
     - openmdao >3.30
     - openpyxl
+    - orbit-nrel
     - pandas
     - pydoe3
         #    - pyoptsparse
@@ -98,7 +101,8 @@ requirements:
     - simpy
     - sortedcontainers
     - statsmodels >=0.14.5
-    - {{ mpi }}      # [mpi != 'nompi' and not win]    
+    - windIO >=2.1.1
+    - wombat
 
 # Putting numpy in 'host' section and pin_compatible in run per conda-forge guidance
 test:
@@ -113,11 +117,7 @@ test:
     - examples
     - examples/02_reference_turbines
   commands:
-    - pip install orbit-nrel
-    - pip install jsonmerge
-    - pip install windIO
-    - pip install dearpygui   # [not aarch64]
-    - pip install wombat >=0.13.1
+    - pip install dearpygui  # [not aarch64]
     - wisdem --help
     - compare_designs -h
     - cd examples
