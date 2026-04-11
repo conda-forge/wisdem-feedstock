@@ -1,0 +1,131 @@
+context:
+  version: "4.2.0"
+  name: wisdem
+  build: 1
+  mpi: ${{ mpi or 'nompi' }}
+  build_number: ${{ build + 100 if mpi == 'nompi' else build }}
+  # MPI now supported! https://conda-forge.org/docs/maintainer/knowledge_base.html#message-passing-interface-mpi
+  # ensure mpi is defined (needed for conda-smithy recipe-lint)
+  mpi_prefix: ${{ 'mpi_' + mpi if mpi != 'nompi' else 'nompi' }}
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/WISDEM/WISDEM/archive/v${{ version }}.tar.gz
+  sha256: fd2ccf452f969501bbf990bd754062bf711b755030cb457afdadaa4a4a465bf3
+
+build:
+  number: ${{ build_number }}
+  string: ${{ mpi_prefix }}_h${{ hash }}_${{ build_number }}
+  skip:
+    - win and mpi != 'nompi'
+    - match(python, "<3.11")
+  python:
+    entry_points:
+      - wisdem = wisdem.main:wisdem_cmd
+      - compare_designs = wisdem.postprocessing.compare_designs:main
+
+requirements:
+  build:
+    - if: not win
+      then:
+        - ${{ stdlib("c") }}
+        - ${{ compiler('c') }}
+        - ${{ compiler('fortran') }}
+    - if: win
+      then:
+        - ${{ compiler('m2w64_c') }}
+        - ${{ compiler('m2w64_fortran') }}
+    - if: build_platform != target_platform
+      then:
+        - cross-python_${{ target_platform }}
+        - python
+        - meson
+        - ninja
+        - numpy
+        - pkg-config
+        - wheel
+        - python-build
+  host:
+    - if: win
+      then:
+        - libpython
+    - cython
+    - meson
+    - python
+    - python-build
+    - pip
+    - numpy
+    - setuptools
+    - if: mpi != 'nompi'
+      then:
+        - ${{ mpi }}
+  run:
+    - python
+    - numpy
+    - scipy
+    - pandas
+    - matplotlib-base
+    - openpyxl
+    - pyyaml
+    - ruamel.yaml
+    - jsonmerge
+    - jsonschema
+    - openmdao >3.30
+    - moorpy ==1.2.1
+    - pydoe3
+    - pytest
+    - python-benedict
+    - simpy
+    - sortedcontainers
+    - statsmodels >=0.14.5
+    - nlopt
+    - orbit-nrel
+    - windio >=2.1.1
+    - wombat >=0.13.1
+    - if: mpi != 'nompi'
+      then:
+        - ${{ mpi }}
+  run_exports:
+    - if: mpi != 'nompi'
+      then:
+        - ${{ name }} * ${{ mpi_prefix }}_*
+
+tests:
+  - script:
+      - wisdem --help
+      - compare_designs -h
+      - if: not aarch64
+        then:
+          - pip install dearpygui
+      - cd examples/02_reference_turbines && python nrel5mw_driver.py && cd ../..
+    requirements:
+      run:
+        - pip
+        - pytest
+    files:
+      source:
+        - wisdem
+        - examples
+        - examples/02_reference_turbines
+
+about:
+  homepage: https://wisdem.readthedocs.io
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Wind-Plant Integrated System Design and Engineering Model
+  description: |
+    The Wind-Plant Integrated System Design and Engineering Model (WISDEM) is a
+    set of models for assessing overall wind plant cost of energy (COE). The models
+    use wind turbine and plant cost and energy production as well as financial
+    models to estimate coe and other wind plant system attributes. WISDEM is developed by
+    the National Renewable Energy Lab, on top of NASA's OpenMDAO library.
+  repository: https://github.com/wisdem/wisdem
+  documentation: https://wisdem.readthedocs.io
+
+extra:
+  recipe-maintainers:
+    - ptrbortolotti
+    - gbarter

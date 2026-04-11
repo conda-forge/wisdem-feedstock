@@ -3,7 +3,7 @@ About wisdem-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/wisdem-feedstock/blob/main/LICENSE.txt)
 
-Home: https://wisdem.readthedocs.io
+Home: https://wisdem.readthedocs.io/
 
 Package license: Apache-2.0
 
@@ -11,14 +11,13 @@ Summary: Wind-Plant Integrated System Design and Engineering Model
 
 Development: https://github.com/wisdem/wisdem
 
-Documentation: https://wisdem.readthedocs.io
+Documentation: https://wisdem.readthedocs.io/
 
-The Wind-Plant Integrated System Design and Engineering Model (WISDEM®) is a
+The Wind-Plant Integrated System Design and Engineering Model (WISDEM) is a
 set of models for assessing overall wind plant cost of energy (COE). The models
 use wind turbine and plant cost and energy production as well as financial
 models to estimate coe and other wind plant system attributes. WISDEM is developed by
 the National Renewable Energy Lab, on top of NASA's OpenMDAO library.
-
 
 Current build status
 ====================
@@ -374,31 +373,31 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_python3.11.____cpython</td>
+              <td>win_64_mpinompipython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7940&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/wisdem-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.11.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/wisdem-feedstock?branchName=main&jobName=win&configuration=win%20win_64_mpinompipython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_python3.12.____cpython</td>
+              <td>win_64_mpinompipython3.12.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7940&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/wisdem-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.12.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/wisdem-feedstock?branchName=main&jobName=win&configuration=win%20win_64_mpinompipython3.12.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_python3.13.____cp313</td>
+              <td>win_64_mpinompipython3.13.____cp313</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7940&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/wisdem-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.13.____cp313" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/wisdem-feedstock?branchName=main&jobName=win&configuration=win%20win_64_mpinompipython3.13.____cp313" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_python3.14.____cp314</td>
+              <td>win_64_mpinompipython3.14.____cp314</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7940&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/wisdem-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.14.____cp314" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/wisdem-feedstock?branchName=main&jobName=win&configuration=win%20win_64_mpinompipython3.14.____cp314" alt="variant">
                 </a>
               </td>
             </tr>
