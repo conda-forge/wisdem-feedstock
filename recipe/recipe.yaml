@@ -1,7 +1,7 @@
 context:
-  version: "4.2.0"
+  version: "4.2.1"
   name: wisdem
-  build: 2
+  build: 0
   mpi: ${{ mpi or 'nompi' }}
   build_number: ${{ build + 100 if mpi == 'nompi' else build }}
   # MPI now supported! https://conda-forge.org/docs/maintainer/knowledge_base.html#message-passing-interface-mpi
@@ -14,7 +14,7 @@ package:
 
 source:
   url: https://github.com/WISDEM/WISDEM/archive/v${{ version }}.tar.gz
-  sha256: fd2ccf452f969501bbf990bd754062bf711b755030cb457afdadaa4a4a465bf3
+  sha256: fe4f881d87c3af4e19e8f30cb8907abaefdb06cd9f69e82a13b9861247f2c084
 
 build:
   number: ${{ build_number }}
@@ -34,8 +34,7 @@ requirements:
         - ${{ stdlib("c") }}
         - ${{ compiler('c') }}
         - ${{ compiler('fortran') }}
-    - if: win
-      then:
+      else:
         - ${{ compiler('m2w64_c') }}
         - ${{ compiler('m2w64_fortran') }}
     - if: build_platform != target_platform
