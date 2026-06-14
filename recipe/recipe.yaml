@@ -1,7 +1,7 @@
 context:
-  version: "4.2.0"
+  version: "4.2.2"
   name: wisdem
-  build: 2
+  build: 0
   mpi: ${{ mpi or 'nompi' }}
   build_number: ${{ build + 100 if mpi == 'nompi' else build }}
   # MPI now supported! https://conda-forge.org/docs/maintainer/knowledge_base.html#message-passing-interface-mpi
@@ -34,8 +34,7 @@ requirements:
         - ${{ stdlib("c") }}
         - ${{ compiler('c') }}
         - ${{ compiler('fortran') }}
-    - if: win
-      then:
+      else:
         - ${{ compiler('m2w64_c') }}
         - ${{ compiler('m2w64_fortran') }}
     - if: build_platform != target_platform
