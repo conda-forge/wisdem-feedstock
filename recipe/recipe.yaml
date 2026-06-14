@@ -13,7 +13,7 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://github.com/WISDEM/WISDEM/archive/v${{ version }}.tar.gz
+  url: https://github.com/NLRWindSystems/WISDEM/archive/v${{ version }}.tar.gz
   sha256: fd2ccf452f969501bbf990bd754062bf711b755030cb457afdadaa4a4a465bf3
 
 build:
@@ -122,7 +122,7 @@ about:
     use wind turbine and plant cost and energy production as well as financial
     models to estimate coe and other wind plant system attributes. WISDEM is developed by
     the National Renewable Energy Lab, on top of NASA's OpenMDAO library.
-  repository: https://github.com/wisdem/wisdem
+  repository: https://github.com/nlrwindsystems/wisdem
   documentation: https://wisdem.readthedocs.io
 
 extra:
