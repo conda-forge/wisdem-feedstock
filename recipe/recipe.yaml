@@ -1,5 +1,5 @@
 context:
-  version: "4.2.2"
+  version: "4.2.3"
   name: wisdem
   build: 0
   mpi: ${{ mpi or 'nompi' }}
@@ -14,7 +14,8 @@ package:
 
 source:
   url: https://github.com/NLRWindSystems/WISDEM/archive/v${{ version }}.tar.gz
-  sha256: fd2ccf452f969501bbf990bd754062bf711b755030cb457afdadaa4a4a465bf3
+  # openssl sha256 WISDEM-version.tar.gz
+  sha256: 7f6ae53c4cff1d4b8c6b210e15ade90fecbcfffa66d74b1c84c805a86b06454d
 
 build:
   number: ${{ build_number }}
@@ -72,7 +73,7 @@ requirements:
     - ruamel.yaml
     - jsonmerge
     - jsonschema
-    - openmdao >3.30
+    - openmdao >3.43
     - moorpy ==1.2.1
     - pydoe3
     - pytest
