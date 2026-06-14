@@ -1,5 +1,5 @@
 context:
-  version: "4.2.2"
+  version: "4.2.3"
   name: wisdem
   build: 0
   mpi: ${{ mpi or 'nompi' }}
@@ -13,8 +13,9 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://github.com/WISDEM/WISDEM/archive/v${{ version }}.tar.gz
-  sha256: 379f19b0b50477cc3671bab89e824f8d169e1cfa0895a58139da84b984c019b1
+  url: https://github.com/NLRWindSystems/WISDEM/archive/v${{ version }}.tar.gz
+  # openssl sha256 WISDEM-version.tar.gz
+  sha256: 7f6ae53c4cff1d4b8c6b210e15ade90fecbcfffa66d74b1c84c805a86b06454d
 
 build:
   number: ${{ build_number }}
@@ -72,7 +73,7 @@ requirements:
     - ruamel.yaml
     - jsonmerge
     - jsonschema
-    - openmdao >3.30
+    - openmdao >3.43
     - moorpy ==1.2.1
     - pydoe3
     - pytest
@@ -121,7 +122,7 @@ about:
     use wind turbine and plant cost and energy production as well as financial
     models to estimate coe and other wind plant system attributes. WISDEM is developed by
     the National Renewable Energy Lab, on top of NASA's OpenMDAO library.
-  repository: https://github.com/wisdem/wisdem
+  repository: https://github.com/nlrwindsystems/wisdem
   documentation: https://wisdem.readthedocs.io
 
 extra:
