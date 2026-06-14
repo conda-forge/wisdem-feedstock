@@ -9,7 +9,7 @@ Package license: Apache-2.0
 
 Summary: Wind-Plant Integrated System Design and Engineering Model
 
-Development: https://github.com/wisdem/wisdem
+Development: https://github.com/nlrwindsystems/wisdem
 
 Documentation: https://wisdem.readthedocs.io/
 
