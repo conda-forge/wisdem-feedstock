@@ -1,7 +1,7 @@
 context:
-  version: "4.2.6"
+  version: "4.2.7"
   name: wisdem
-  build: 1
+  build: 0
   mpi: ${{ mpi or 'nompi' }}
   build_number: ${{ build + 100 if mpi == 'nompi' else build }}
   # MPI now supported! https://conda-forge.org/docs/maintainer/knowledge_base.html#message-passing-interface-mpi
@@ -15,7 +15,7 @@ package:
 source:
   url: https://github.com/NLRWindSystems/WISDEM/archive/v${{ version }}.tar.gz
   # openssl sha256 WISDEM-version.tar.gz
-  sha256: 6344043b14196a332ab5b820d3f2f9b6bee2d0fd60242e72bf6b14862a3b1ee7
+  sha256: 99c5c5b297e6c86e88d687c3e133c24eb4217ad05ca6b42692583ad8bf2a9e3e
   #patches:
   #    - py311.patch
 
@@ -71,8 +71,9 @@ requirements:
     - ruamel.yaml
     - jsonmerge
     - jsonschema
-    - openmdao >3.43
+    - openmdao >=3.45.1
     - moorpy ==1.2.1
+    - pydoe
     - pydoe3
     - pytest
     - python-benedict
