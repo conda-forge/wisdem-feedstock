@@ -1,9 +1,9 @@
 context:
   version: "4.2.8"
   name: wisdem
-  build: 0
   mpi: ${{ mpi or 'nompi' }}
-  build_number: 0
+  build_base: 0
+  build: ${{ build_base if mpi != 'nompi' else build_base + 100 }}
   # MPI now supported! https://conda-forge.org/docs/maintainer/knowledge_base.html#message-passing-interface-mpi
   # ensure mpi is defined (needed for conda-smithy recipe-lint)
   mpi_prefix: ${{ 'mpi_' + mpi if mpi != 'nompi' else 'nompi' }}
