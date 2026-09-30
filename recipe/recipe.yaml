@@ -1,5 +1,5 @@
 context:
-  version: "4.2.7"
+  version: "4.2.8"
   name: wisdem
   build: 0
   mpi: ${{ mpi or 'nompi' }}
@@ -15,7 +15,7 @@ package:
 source:
   url: https://github.com/NLRWindSystems/WISDEM/archive/v${{ version }}.tar.gz
   # openssl sha256 WISDEM-version.tar.gz
-  sha256: 99c5c5b297e6c86e88d687c3e133c24eb4217ad05ca6b42692583ad8bf2a9e3e
+  sha256: 66bf2bc29411a4ec6b7028381816e4abd089b67dd3ede6ae821091900917f01a
   #patches:
   #    - py311.patch
 
