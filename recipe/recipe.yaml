@@ -20,8 +20,8 @@ source:
   #    - py311.patch
 
 build:
-  number: ${{ build_number }}
-  string: ${{ mpi_prefix }}_h${{ hash }}_${{ build_number }}
+  number: ${{ build }}
+  string: ${{ mpi_prefix }}_h${{ hash }}_${{ build }}
   skip:
     - win and mpi != 'nompi'
     - match(python, "<3.11")
@@ -31,12 +31,12 @@ build:
       - compare_designs = wisdem.postprocessing.compare_designs:main
 
 requirements:
-  build:
-    # uses m2w64 toolchain on windows, see conda_build_config.yaml
+  :
+    # uses m2w64 toolchain on windows, see conda__config.yaml
     - ${{ stdlib("c") }}
     - ${{ compiler("c") }}
     - ${{ compiler("fortran") }}
-    - if: build_platform != target_platform
+    - if: _platform != target_platform
       then:
         - cross-python_${{ target_platform }}
         - python
@@ -45,7 +45,7 @@ requirements:
         - numpy
         - pkg-config
         - wheel
-        - python-build
+        - python-
   host:
     - if: win
       then:
@@ -53,7 +53,7 @@ requirements:
     - cython
     - meson
     - python
-    - python-build
+    - python-
     - pip
     - numpy
     - setuptools
